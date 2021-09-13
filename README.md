@@ -98,3 +98,46 @@ feedback
 speaker
 
 booking
+
+# Add GRPC to this project
+
+1. create event/emspb folder
+
+event_type.proto
+
+```proto
+syntax = "proto3";
+
+package event;
+
+option go_package = "./event/emspb";
+
+
+message EventType{
+    string id = 1;
+    string eventTypeName = 2;
+}
+
+message CreateEventTypeRequest{
+    EventType eventType = 1;
+}
+
+message CreateEventTypeRespone{
+    EventType eventType = 1;
+}
+
+message ReadEventTypeRequest{
+    EventType eventType =1;
+}
+
+message ReadEventTypeResponse{
+    EventType eventType =1;
+}
+
+
+service EventTypeService{
+    rpc CreateEventType(CreateEventTypeRequest) returns  (CreateEventTypeRespone);
+    rpc ReadEventType(ReadEventTypeRequest) returns (ReadEventTypeResponse);
+
+}
+```
